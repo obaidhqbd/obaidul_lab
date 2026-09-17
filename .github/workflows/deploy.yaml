@@ -1,0 +1,80 @@
+name: Build & Deploy Obaidul Mentor Lab
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'Classes/**'
+      - 'Blogs/**'
+      - 'index.html'
+      - 'styles.css'
+      - 'app.js'
+      - 'sw.js'
+      - 'site.webmanifest'
+      - 'site-config.json'
+      - 'assets/**'
+      - 'scripts/**'
+      - '.github/workflows/deploy.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Build encrypted catalog
+        env:
+          CLASS_ACCESS_PASSWORD: ${{ secrets.CLASS_ACCESS_PASSWORD }}
+          SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
+          GITHUB_ACTIONS: true
+        run: node scripts/build.mjs
+
+      - name: Validate generated site
+        env:
+          CLASS_ACCESS_PASSWORD: ${{ secrets.CLASS_ACCESS_PASSWORD }}
+        run: |
+          test -f dist/index.html
+          test -f dist/data/catalog.enc.json
+          test -f dist/data/build-info.json
+          test -f dist/sitemap.xml
+          test -f dist/assets/vendor/jszip.min.js
+          ! grep -R "demo-only-change-me" dist || (echo "Demo password leaked into build" && exit 1)
+          node scripts/verify-build.mjs
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
