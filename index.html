@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="__SITE_DESCRIPTION__" />
+  <meta name="robots" content="index,follow" />
+  <link rel="manifest" href="./site.webmanifest" />
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>__BRAND_NAME__</title>
+</head>
+<body>
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home" data-route="home" aria-label="Obaidul Mentor Lab home">
+      <span class="brand-mark" aria-hidden="true">O</span>
+      <span class="brand-copy"><strong>__BRAND_NAME__</strong><small>Mentor Lab</small></span>
+    </a>
+    <nav class="topnav" aria-label="Primary navigation">
+      <a href="#home" data-route="home">Home</a>
+      <a href="#classes" data-route="classes">Classes</a>
+      <a href="#blogs" data-route="blogs">Blogs</a>
+      <a href="#workspace" data-route="workspace">Workspace</a>
+    </nav>
+    <div class="top-actions">
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">☼</button>
+      <button class="ghost-btn" id="lock-button" type="button" hidden>Lock</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home-view" class="view active-view" data-view="home">
+      <div class="hero-wrap shell">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse-dot"></span> Premium student support · HTML + CSS</div>
+          <h1>Learn it. <span>Build it.</span> Understand it.</h1>
+          <p class="hero-text">A focused learning lab for students who want the source code, the challenge, the preview, and the confidence to build it themselves.</p>
+          <div class="hero-actions">
+            <button class="primary-btn" id="hero-access" type="button">Open student lab <span>→</span></button>
+            <a class="secondary-btn" href="#blogs" data-route="blogs">Read mentor notes</a>
+          </div>
+          <div class="micro-proof">
+            <span>Monaco editor</span><i></i><span>Live preview</span><i></i><span>Local save</span><i></i><span>ZIP export</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="infinity-system">
+            <div class="infinity infinity-one"></div>
+            <div class="infinity infinity-two"></div>
+            <span class="orbit-node node-a"></span>
+            <span class="orbit-node node-b"></span>
+            <span class="orbit-node node-c"></span>
+            <div class="mentor-orb"><span>O</span><small>MENTOR</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shell feature-grid">
+        <article class="feature-card"><span class="feature-icon">⌘</span><div><h3>Code-first classes</h3><p>Open the exact class files, inspect them, edit them and learn by doing.</p></div></article>
+        <article class="feature-card"><span class="feature-icon">✓</span><div><h3>Interactive homework</h3><p>Turn requirements into small checks so students know when their work is actually done.</p></div></article>
+        <article class="feature-card"><span class="feature-icon">↗</span><div><h3>Build → preview → export</h3><p>Preview the page immediately, keep work locally, then export the edited project as ZIP.</p></div></article>
+        <article class="feature-card"><span class="feature-icon">∞</span><div><h3>Works with automation</h3><p>Upload folders or ZIPs and let GitHub Actions create the catalog, encryption payloads and sitemap.</p></div></article>
+      </div>
+    </section>
+
+    <section id="classes-view" class="view shell" data-view="classes">
+      <div class="section-head">
+        <div><div class="eyebrow">Student library</div><h2>Classes</h2><p>Protected lessons, source files and guided homework.</p></div>
+        <div class="section-tools"><input id="class-search" class="search-input" placeholder="Search classes…" autocomplete="off" /></div>
+      </div>
+      <div id="class-grid" class="content-grid"></div>
+      <div id="classes-empty" class="empty-state" hidden><div class="empty-orb">∅</div><h3>No classes found</h3><p>Your library is either empty or the filter is being dramatic.</p></div>
+    </section>
+
+    <section id="blogs-view" class="view shell" data-view="blogs">
+      <div class="section-head">
+        <div><div class="eyebrow">From the mentor desk</div><h2>Blogs</h2><p>Short practical notes that help students connect concepts.</p></div>
+        <div class="section-tools"><input id="blog-search" class="search-input" placeholder="Search articles…" autocomplete="off" /></div>
+      </div>
+      <div id="blog-grid" class="content-grid"></div>
+      <div id="blogs-empty" class="empty-state" hidden><div class="empty-orb">∅</div><h3>No posts found</h3><p>Add a folder or ZIP inside <code>Blogs/</code> and let Actions do the rest.</p></div>
+    </section>
+
+    <section id="workspace-view" class="view shell" data-view="workspace">
+      <div class="workspace-shell">
+        <div class="workspace-head">
+          <div><div class="eyebrow">Your local workspace</div><h2 id="workspace-title">No class opened</h2><p id="workspace-subtitle">Choose a class to start coding.</p></div>
+          <div class="workspace-actions">
+            <button class="ghost-btn" id="download-original" type="button" disabled>Provided ZIP</button>
+            <button class="primary-btn" id="download-edited" type="button" disabled>Download my ZIP</button>
+          </div>
+        </div>
+        <div class="workspace-grid">
+          <aside class="file-panel panel">
+            <div class="panel-head"><strong>Explorer</strong><span id="file-count">0 files</span></div>
+            <div id="file-list" class="file-list"></div>
+          </aside>
+          <section class="editor-panel panel">
+            <div class="editor-toolbar"><span id="active-file">Select a file</span><div class="toolbar-right"><button id="format-code" class="tiny-btn" type="button">Format</button><span id="save-state">Ready</span></div></div>
+            <div id="editor" class="editor"></div>
+            <textarea id="fallback-editor" class="fallback-editor" spellcheck="false" hidden></textarea>
+          </section>
+          <section class="preview-panel panel">
+            <div class="panel-head"><strong>Live preview</strong><div class="preview-tools"><button id="refresh-preview" class="tiny-btn" type="button">Refresh</button><button id="open-preview" class="tiny-btn" type="button">Pop out</button></div></div>
+            <iframe id="preview-frame" title="Student project live preview" sandbox="allow-forms allow-modals"></iframe>
+          </section>
+        </div>
+        <div class="workspace-bottom">
+          <section class="tasks-panel panel"><div class="panel-head"><strong>Homework</strong><span id="task-progress-label">0 / 0</span></div><div id="task-list" class="task-list"></div></section>
+          <section class="tips-panel panel"><div class="panel-head"><strong>Mentor hints</strong><span>Local</span></div><div id="hint-box" class="hint-box"><p>Open a class and its task hints will appear here.</p></div></section>
+        </div>
+      </div>
+    </section>
+
+    <section id="article-view" class="view shell" data-view="article">
+      <button class="back-link" id="article-back" type="button">← Back to blogs</button>
+      <article class="article-wrap panel"><div id="article-content"></div></article>
+    </section>
+
+    <section id="login-view" class="view shell login-view" data-view="login">
+      <div class="login-card panel">
+        <div class="login-icon">⌁</div>
+        <div class="eyebrow">Private student access</div>
+        <h2>Enter your class password</h2>
+        <p>The password unlocks the encrypted class library in your browser. It is never sent to a server.</p>
+        <form id="unlock-form"><label for="access-password">Access password</label><div class="password-row"><input id="access-password" type="password" autocomplete="current-password" required minlength="4"/><button class="primary-btn" type="submit">Unlock <span>→</span></button></div><small id="unlock-error" class="form-error" role="status"></small></form>
+        <div class="security-note"><span>▣</span><div><strong>Protected by browser-side decryption</strong><p>GitHub Actions stores the encryption secret; the browser only decrypts a class after you enter the password.</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <div><strong>__BRAND_NAME__</strong><span>·</span><span>__BRAND_ROLE__</span></div>
+    <div><a class="portfolio-link" id="portfolio-link" href="__PORTFOLIO_URL__" target="_blank" rel="noopener noreferrer">__PORTFOLIO_LABEL__ ↗</a><span>·</span><span>© <span id="year"></span> __BRAND_MENTOR__</span></div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="./assets/vendor/jszip.min.js"></script>
+  <script>
+    window.MONACO_VERSION = '0.56.0';
+    window.monacoReady = new Promise((resolve) => {
+      let settled = false;
+      const finish = (value) => { if (!settled) { settled = true; resolve(value); } };
+      const timer = setTimeout(() => finish(null), 9000);
+      const loader = document.createElement('script');
+      loader.src = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.56.0/min/vs/loader.js';
+      loader.onload = () => {
+        try {
+          require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.56.0/min/vs' } });
+          require(['vs/editor/editor.main'], () => {
+            clearTimeout(timer);
+            finish(window.monaco || null);
+          }, () => { clearTimeout(timer); finish(null); });
+        } catch (err) {
+          clearTimeout(timer);
+          finish(null);
+        }
+      };
+      loader.onerror = () => { clearTimeout(timer); finish(null); };
+      document.head.appendChild(loader);
+    });
+  </script>
+  <script src="./app.js"></script>
+</body>
+</html>

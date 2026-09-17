@@ -1,0 +1,26 @@
+{
+  "title": "HTML Forms: Build a Student Registration Form",
+  "description": "Practice HTML form structure by building a clean student registration form using HTML and CSS only.",
+  "category": "HTML",
+  "level": "Beginner",
+  "duration": "45 minutes",
+  "tags": [
+    "HTML",
+    "Forms",
+    "CSS",
+    "Practice"
+  ],
+  "author": "Obaidul",
+  "type": "class",
+  "homework": {
+    "title": "Student Registration Form Challenge",
+    "description": "Recreate the supplied form, then improve its visual hierarchy without JavaScript.",
+    "checks": [
+      "Use a form element with a meaningful action and method.",
+      "Add labels for every form control.",
+      "Include text, email, password, date, radio, checkbox and select controls.",
+      "Create a responsive two-column layout that becomes one column on small screens.",
+      "Add visible focus styles to interactive controls."
+    ]
+  }
+}

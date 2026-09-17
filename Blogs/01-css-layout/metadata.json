@@ -1,0 +1,10 @@
+{
+  "id": "css-layout",
+  "title": "A Better Mental Model for CSS Layout",
+  "description": "Use flow, flexbox and grid deliberately instead of throwing declarations at the browser until it gives up.",
+  "level": "Beginner",
+  "duration": "6 min read",
+  "tags": ["CSS", "Layout", "Flexbox", "Grid"],
+  "order": 1,
+  "featured": true
+}

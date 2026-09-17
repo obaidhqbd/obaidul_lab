@@ -1,0 +1,53 @@
+{
+  "id": "html-forms",
+  "title": "HTML Forms: Structure, Labels & Inputs",
+  "description": "Build a clean, semantic HTML form from scratch and understand why each control exists.",
+  "summary": "A practical HTML form class with a mini project and automated homework checks.",
+  "level": "Beginner",
+  "duration": "45–60 min",
+  "tags": ["HTML", "Forms", "Semantics"],
+  "order": 1,
+  "featured": true,
+  "homework": {
+    "hints": [
+      "Start with the form element, then create a label-input pair for every field.",
+      "Use type='email' for email and type='submit' for the primary action.",
+      "Inspect the browser preview after every small change instead of writing the whole form at once."
+    ],
+    "tasks": [
+      {
+        "title": "Create the main form",
+        "description": "Add a form with a visible heading and a short helper paragraph.",
+        "checks": [
+          {"type":"contains","file":"index.html","value":"<form"},
+          {"type":"regex","file":"index.html","pattern":"<h1[^>]*>.*?</h1>","flags":"is"}
+        ]
+      },
+      {
+        "title": "Add accessible labels",
+        "description": "Create at least three labels and connect each one to an input with a matching id/for pair.",
+        "checks": [
+          {"type":"html_elements","file":"index.html","tag":"label","min":3},
+          {"type":"regex","file":"index.html","pattern":"<label[^>]+for=", "flags":"i"}
+        ]
+      },
+      {
+        "title": "Use correct field types",
+        "description": "Include an email field, a password field and a submit control.",
+        "checks": [
+          {"type":"contains","file":"index.html","value":"type=\"email\"","flags":"i"},
+          {"type":"contains","file":"index.html","value":"type=\"password\"","flags":"i"},
+          {"type":"contains","file":"index.html","value":"type=\"submit\"","flags":"i"}
+        ]
+      },
+      {
+        "title": "Add a focused visual system",
+        "description": "Style the form container with spacing and a border radius.",
+        "checks": [
+          {"type":"css_property","file":"styles.css","property":"border-radius","value":"16px"},
+          {"type":"regex","file":"styles.css","pattern":"padding\\s*:","flags":"i"}
+        ]
+      }
+    ]
+  }
+}

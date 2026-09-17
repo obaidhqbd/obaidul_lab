@@ -1,0 +1,12 @@
+{
+  "brand": {
+    "name": "Obaidul Mentor Lab",
+    "mentor": "Mohammed Obaidul Hoque",
+    "role": "web development mentor",
+    "portfolioUrl": "https://obaidulctg.github.io/pro",
+    "portfolioLabel": "Portfolio"
+  },
+  "site": {
+    "description": "A focused premium support lab for students learning web design with HTML and CSS."
+  }
+}
